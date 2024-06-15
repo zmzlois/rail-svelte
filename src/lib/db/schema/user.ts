@@ -8,9 +8,20 @@ import {
     varchar,
 } from "drizzle-orm/pg-core"
 
-import type { AdapterAccountType } from "next-auth/adapters"
 import { base } from "./base"
 
+export type WebAuthnProviderType = "webauthn"
+export type ProviderType =
+    | "oidc"
+    | "oauth"
+    | "email"
+    | "credentials"
+    | WebAuthnProviderType
+
+type AdapterAccountType = Extract<
+    ProviderType,
+    "oauth" | "oidc" | "email" | "webauthn"
+>
 
 
 
