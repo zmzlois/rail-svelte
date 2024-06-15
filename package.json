@@ -53,6 +53,7 @@
 		"postgres": "^3.4.4",
 		"tailwind-merge": "^2.3.0",
 		"tailwind-variants": "^0.2.1",
-		"tailwindcss-animate": "^1.0.7"
+		"tailwindcss-animate": "^1.0.7",
+		"vite-plugin-zephyr": "^0.0.13"
 	}
 }

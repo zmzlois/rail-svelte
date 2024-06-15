@@ -25,6 +25,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
             }
         });
         const githubUser: GitHubUser = await githubUserResponse.json();
+        console.log("github user", githubUser)
 
         // Replace this with your own DB client.
         const existingUser = await db.select().from(users).where(eq(users.github_id, githubUser.id)).then((rows) => rows[0]);
@@ -35,6 +36,8 @@ export async function GET(event: RequestEvent): Promise<Response> {
                 access_token: tokens.accessToken
             }).where(eq(accounts.providerAccountId, githubUser.id))
 
+            console.log("update", updateToken)
+
             const session = await lucia.createSession(existingUser.id, {});
             const sessionCookie = lucia.createSessionCookie(session.id);
 
@@ -44,6 +47,8 @@ export async function GET(event: RequestEvent): Promise<Response> {
             });
 
             if (!origin) {
+
+                console.log("origin doesn't exist")
                 return new Response(null, {
                     status: 302,
                     headers: {
