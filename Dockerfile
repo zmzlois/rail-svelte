@@ -1,12 +1,16 @@
-FROM node:12 AS build
+FROM node:20-alpine AS builder
+WORKDIR /staging
+COPY . /staging/
+RUN corepack enable && \
+    pnpm install --frozen-lockfile && \
+    pnpm build && \
+    pnpm prune --prod
 
+FROM node:20-alpine
 WORKDIR /app
+COPY --from=builder /staging/package.json /staging/pnpm-lock.yaml  /app/
+COPY --from=builder /staging/node_modules /app/node_modules
+COPY --from=builder /staging/build /app/build
 
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm install
-COPY . ./
-RUN npm run build
-
-FROM nginx:1.19-alpine
-COPY --from=build /app/public /usr/share/nginx/html
+EXPOSE 3000
+CMD ["node", "-r", "dotenv/config", "/app/build/index.js"]
