@@ -1,11 +1,13 @@
 import { fontFamily } from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
 
+
 const config: Config = {
 	darkMode: ["class"],
 	content: ["./src/**/*.{html,js,svelte,ts}"],
 	safelist: ["dark"],
 	theme: {
+
 		container: {
 			center: true,
 			padding: "2rem",
@@ -47,7 +49,33 @@ const config: Config = {
 				card: {
 					DEFAULT: "hsl(var(--card) / <alpha-value>)",
 					foreground: "hsl(var(--card-foreground) / <alpha-value>)"
+				},
+				hero_gradient: {
+					DEFAULT: "var(--hero-gradient)",
+				},
+				accent_1: {
+					DEFAULT: "hsl(var(--accent-1))",
+				},
+				accent_2: {
+					DEFAULT: "hsl(var(--accent-2))",
 				}
+			},
+			backgroundImage: {
+				"dot-pattern": "url('/polka-dots.svg')",
+			},
+			keyframes: {
+				"accordion-down": {
+					from: { height: "0" },
+					to: { height: "var(--radix-accordion-content-height)" },
+				},
+				"accordion-up": {
+					from: { height: "var(--radix-accordion-content-height)" },
+					to: { height: "0" },
+				},
+			},
+			animation: {
+				"accordion-down": "accordion-down 0.2s ease-out",
+				"accordion-up": "accordion-up 0.2s ease-out",
 			},
 			borderRadius: {
 				lg: "var(--radius)",
@@ -59,6 +87,7 @@ const config: Config = {
 			}
 		}
 	},
+	plugins: [require("tailwindcss-animate")]
 };
 
 export default config;

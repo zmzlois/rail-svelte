@@ -3,13 +3,13 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Rail in Svelte</title>
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
 
-<div class="flex flex-col container mx-auto">
-	<section class="bg-hero_gradient">
+<section class="flex flex-col container mx-auto max-h-screen">
+	<div class="bg-[var(--hero_gradient)]">
 	<div class="z-10 relative flex flex-col items-start justify-center min-h-[80vh]">
 	  <div class="sm:w-[60vw] w-full flex flex-col lg:gap-8 gap-4">
 		<h1>
@@ -36,16 +36,14 @@
 	</a>
 	  </div>
 	</div>
-  </section></div>	
+  </div>
+  <footer>
+	<p class="text-center">
+		Look, this is a toy project. Please don&apos;t deploy anything for
+		production or store sensitive data here. <br /> If you really want
+		to... remember to encrypt your data. <br />
+		If you don&lsquo;t I will see everything!
+	  </p>
+</footer>
+</section>	
 
-
-<style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
-
-</style>
