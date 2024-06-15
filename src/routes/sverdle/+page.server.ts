@@ -1,30 +1,32 @@
-import { fail } from '@sveltejs/kit';
 import { Game } from './game';
 import type { PageServerLoad, Actions } from './$types';
+import { fail, redirect } from "@sveltejs/kit";
+import { lucia } from "$lib/server/auth";
 
-export const load = (({ cookies }) => {
-	const game = new Game(cookies.get('sverdle'));
+export const load: PageServerLoad = async (event) => {
+
+	if (!event.locals.user) redirect(302, "/login");
 
 	return {
-		/**
-		 * The player's guessed words so far
-		 */
-		guesses: game.guesses,
-
-		/**
-		 * An array of strings like '__x_c' corresponding to the guesses, where 'x' means
-		 * an exact match, and 'c' means a close match (right letter, wrong place)
-		 */
-		answers: game.answers,
-
-		/**
-		 * The correct answer, revealed if the game is over
-		 */
-		answer: game.answers.length >= 6 ? game.answer : null
+		username: event.locals.user.username
 	};
-}) satisfies PageServerLoad;
+
+}
 
 export const actions = {
+
+	default: async (event) => {
+		if (!event.locals.session) {
+			return fail(401);
+		}
+		await lucia.invalidateSession(event.locals.session.id);
+		const sessionCookie = lucia.createBlankSessionCookie();
+		event.cookies.set(sessionCookie.name, sessionCookie.value, {
+			path: ".",
+			...sessionCookie.attributes
+		});
+		redirect(302, "/login");
+	},
 	/**
 	 * Modify game state in reaction to a keypress. If client-side JavaScript
 	 * is available, this will happen in the browser instead of here

@@ -11,6 +11,13 @@ declare global {
 			user: import("lucia").User | null;
 			session: import("lucia").Session | null;
 		}
+
+		type UserProps = {
+			id: string;
+			avatar: string;
+			name: string;
+			teams: string[];
+		};
 	}
 }
 

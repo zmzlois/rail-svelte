@@ -36,4 +36,4 @@ export function createUrlStore(ssrUrl) {
 }
 
 // If you're using in a pure SPA, you can return a store directly and share it everywhere
-export default createUrlStore()
+
