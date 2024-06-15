@@ -2,9 +2,8 @@ FROM node:20-alpine AS builder
 WORKDIR /staging
 COPY . /staging/
 RUN corepack enable && \
-    pnpm install --frozen-lockfile && \
-    pnpm build && \
-    pnpm prune --prod
+    npm install --frozen-lockfile && \
+    npm run build && \  ## npm run prune --prod
 
 FROM node:20-alpine
 WORKDIR /app
