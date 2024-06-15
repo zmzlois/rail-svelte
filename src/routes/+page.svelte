@@ -1,7 +1,5 @@
 <script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+	
 </script>
 
 <svelte:head>
@@ -9,24 +7,37 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
 
-		to your new<br />SvelteKit app
-	</h1>
+<div class="flex flex-col container mx-auto">
+	<section class="bg-hero_gradient">
+	<div class="z-10 relative flex flex-col items-start justify-center min-h-[80vh]">
+	  <div class="sm:w-[60vw] w-full flex flex-col lg:gap-8 gap-4">
+		<h1>
+		  Just deploy it.
+		  <br />
+		  No tracing. No logs. No fuzz.
+		</h1>
+		<h2>
+		  Tiny Rail is a light mock of railway. <br /> See the{" "}
+		  <a
+			href="https://railway.app"
+			target="_blank"
+			rel="noreferrer"
+			class="text-purple-500 underline underline-offset-4 decoration-1"
+		  >
+			<b>actual thing</b>
+		  </a>
+		</h2>
+		<a
+		  href="/new"
+		  class="bg-gradient-to-r from-purple-800/80 via-purple-800 to-accent_1 sm:w-1/3  rounded-lg items-center p-4"
+		>
+		  <p class="text-primary text-center">Start a New Project</p>
+	</a>
+	  </div>
+	</div>
+  </section></div>	
 
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
-</section>
 
 <style>
 	section {
@@ -37,23 +48,4 @@
 		flex: 0.6;
 	}
 
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
 </style>
