@@ -7,5 +7,6 @@
         name: "",
         id: "",
         projectName: "",
+        avatar: ""
     })
 </script>
