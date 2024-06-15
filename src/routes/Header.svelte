@@ -5,7 +5,7 @@
 	import { cn } from '$lib/utils';
 	import url from "$lib/hooks/url"
 	import ProjectBreadcrumb from './ProjectBreadcrumb.svelte';
-	export let user = undefined;
+	// export let user = undefined;
 
 </script>
 

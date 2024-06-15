@@ -7,7 +7,7 @@ RUN corepack enable && \
 
 FROM node:20-alpine
 WORKDIR /app
-COPY --from=builder /staging/package.json /staging/pnpm-lock.yaml  /app/
+COPY --from=builder /staging/package.json /staging/package-lock.json  /app/
 COPY --from=builder /staging/node_modules /app/node_modules
 COPY --from=builder /staging/build /app/build
 
