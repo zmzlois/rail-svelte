@@ -12,7 +12,7 @@ export const load: PageServerLoad = async ({ params }) => {
 		.rightJoin(users, eq(users.id, workspaces.creatorId))
 		.where(eq(users.github_id, github_id));
 
-	await setTimeout(() => { }, 50000)
+	await setTimeout(() => {}, 50000);
 
 	return { user: result[0].user, projects: result.map((item) => item.projects) };
 };

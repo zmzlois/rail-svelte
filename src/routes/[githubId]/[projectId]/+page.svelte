@@ -1,15 +1,10 @@
 <script lang="ts">
+	import type { PageData } from '../$types';
+	export let data: PageData;
 
-    import type { PageData } from "../$types";
-    export let data: PageData
+	let value = '';
 
-    let value = ""
-
-    $: result = ""
-
-    console.log("project.data", data)
+	$: result = '';
 </script>
-<div class="items-center flex justify-center mx-auto   container ">
 
-
-</div>
+<div class="container mx-auto flex items-center justify-center"></div>
