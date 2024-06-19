@@ -3,10 +3,10 @@
 	import * as Card from '$lib/components/ui/card';
 	import * as Dropdown from '$lib/components/ui/dropdown-menu';
 	import * as Select from '$lib/components/ui/select';
+	import { Skeleton } from "$lib/components/ui/skeleton";
 	export let data: PageData;
 
-	const user = data.user;
-	const projects = data.projects;
+
 </script>
 
 <div class="container mx-auto flex flex-col gap-10 p-10">
@@ -22,8 +22,25 @@
 		</Select.Root>
 	</section>
 	<section class="flex flex-wrap gap-6">
-		{#each projects as project (project.id)}
-			<a href={`/${user.github_id}/${project.id}`}>
+		{#await data.projects}
+		{#each Array.from(["projects"]) as i}
+		<Card.Root class="min-w-[260px] max-w-[300px]">
+			<Card.Header>
+				<Card.Title><Skeleton class="w-1/2 h-8 rounded-lg"/></Card.Title>
+				<Card.Description><Skeleton class="w-1/3 h-8 rounded-lg"/></Card.Description>
+			</Card.Header>
+			<Card.Content>
+				<p><Skeleton class="w-1/5 h-8 rounded-lg"/></p>
+			</Card.Content>
+			<Card.Footer>
+				<p><Skeleton class="w-1/4 h-8 rounded-lg"/></p>
+			</Card.Footer>
+		</Card.Root>
+		{/each}
+		{:then value}
+		<ol class="flex flex-wrap gap-6">
+		{#each value as project (project.id)}
+			<a href={`/${data.user.github_id}/${project.id}`}>
 				<Card.Root class="min-w-[260px] max-w-[300px]">
 					<Card.Header>
 						<Card.Title>{project.name}</Card.Title>
@@ -38,7 +55,7 @@
 				</Card.Root></a
 			>
 		{/each}
-
-		some dive
+			</ol>
+		{/await}
 	</section>
 </div>
