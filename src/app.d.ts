@@ -8,18 +8,17 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 		interface Locals {
-			user: import("lucia").User | null;
-			session: import("lucia").Session | null;
+			user: import('lucia').User | null;
+			session: import('lucia').Session | null;
 		}
 
-		type UserProps = {
+		interface UserProps {
 			id: string;
 			avatar: string;
 			name: string;
 			teams: string[];
-		};
+		}
 	}
 }
 
-export { };
-
+export {};
