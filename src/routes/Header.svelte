@@ -9,8 +9,9 @@
 	// show project related information
 	export let user;
 	let userInfoValue = '';
-	let projects: any[] = [];
-	projectsList.subscribe((value) => (projects = value.projects));
+	let projects = [{ name: '', id: '' }];
+
+	projectsList.subscribe((value) => (projects = value));
 	userInfo.subscribe((value) => (userInfoValue = value));
 	$: console.log('project.list', projects);
 
@@ -24,6 +25,10 @@
 </script>
 
 <header class="container mx-auto flex items-center justify-between px-6 py-6">
+{#if outer}
+<svelte:self bind:this={component} outer={false}/>
+{/if}
+
 	<div class="col-span-1 flex items-center gap-4 text-zinc-100">
 		<a href="/{user.githubId}"><h3 class="text-lg font-bold">Rail In Svelte</h3></a>
 		{#if path.split('/').length > 2 && userInfoValue.projectName !== undefined}

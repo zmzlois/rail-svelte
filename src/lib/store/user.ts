@@ -7,6 +7,6 @@ export const user = writable({
 	avatar: ''
 });
 
-export const projectsList = writable({
-	projects: []
+export const projectsList = writable<{ projects: { name: string; id: string } }[]>({
+	projects: [{ name: '', id: '' }]
 });

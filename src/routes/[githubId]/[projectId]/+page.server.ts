@@ -4,8 +4,6 @@ import { eq } from 'drizzle-orm';
 import type { PageServerLoad } from '../$types';
 
 export const load: PageServerLoad = async ({ params }) => {
-	const gql = await client();
-
 	const project = await db
 		.select()
 		.from(projects)
@@ -14,48 +12,10 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	if (!project) return null;
 
-	const results = await gql.query({
-		project: {
-			__args: {
-				id: project.externalId!
-			},
-			__scalar: true,
-
-			id: true,
-			name: true,
-			__typename: true,
-			environments: {
-				edges: {
-					node: {
-						id: true,
-						__scalar: true
-					}
-				}
-			},
-			services: {
-				edges: {
-					node: {
-						id: true,
-						name: true,
-						__scalar: true,
-
-						deployments: {
-							edges: {
-								node: {
-									id: true,
-									staticUrl: true,
-									__scalar: true
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	});
+	const results = await db.select().from(services).where(eq(services.projectId, params.projectId));
 
 	return {
-		services: results.project.services.edges.map((item) => item.node),
+		services: results,
 		projectId: params.projectId
 	};
 };

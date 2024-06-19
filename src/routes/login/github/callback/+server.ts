@@ -4,6 +4,7 @@ import { github, lucia } from '$lib/server/auth';
 import { accounts, db, users, workspaceMembers, workspaces } from '$lib/server/db';
 import { eq } from 'drizzle-orm';
 import type { RequestEvent } from '@sveltejs/kit';
+// src/routes/login/github/callback/+server.ts
 import { deserializeState } from '$lib/generate-state';
 export async function GET(event: RequestEvent): Promise<Response> {
 	const code = event.url.searchParams.get('code');
@@ -41,8 +42,6 @@ export async function GET(event: RequestEvent): Promise<Response> {
 					access_token: tokens.accessToken
 				})
 				.where(eq(accounts.providerAccountId, githubUser.id));
-
-			console.log('update', updateToken);
 
 			const session = await lucia.createSession(existingUser.id, {});
 			const sessionCookie = lucia.createSessionCookie(session.id);

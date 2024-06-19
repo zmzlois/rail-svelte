@@ -3,6 +3,7 @@ import { github } from '$lib/server/auth';
 import { serializeState } from '$lib/generate-state';
 import type { RequestEvent } from '@sveltejs/kit';
 
+// src/routes/login/github/+server.ts
 export async function GET(event: RequestEvent): Promise<Response> {
 	const requestUrl = new URL(event.url);
 
