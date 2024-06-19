@@ -1,5 +1,5 @@
 import { client } from "$lib/server/graphql";
-import { db, projects, services } from "$lib/server/db";
+import { db, projects } from "$lib/server/db";
 import { eq } from "drizzle-orm";
 import type { PageServerLoad } from "../$types";
 
